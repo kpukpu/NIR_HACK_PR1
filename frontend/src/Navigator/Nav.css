@@ -1,0 +1,14 @@
+.navbar {
+    width: 100%;
+    background-color: white;
+    padding: 15px 0;
+    text-align: left;
+    outline-style: solid;
+}
+
+.navbarMenu {
+    color: black;
+    margin: 12px;
+    text-decoration: none;
+}
+

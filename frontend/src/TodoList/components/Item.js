@@ -1,6 +1,6 @@
 import React from "react";
 
-const TodoItem = ({ todo, toggleComplete, removeTodo }) => {
+const Item = ({ todo, toggleComplete, removeTodo }) => {
     return (
         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px', borderBottom: '1px solid #ccc'}}>
             <div style={{ textDecoration: todo.completed ? 'line-through' : ''}}>
@@ -14,4 +14,4 @@ const TodoItem = ({ todo, toggleComplete, removeTodo }) => {
     );
 };
 
-export default TodoItem
+export default Item
