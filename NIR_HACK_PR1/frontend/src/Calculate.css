@@ -1,0 +1,11 @@
+.input-container input {
+    width: 100px;
+    height: 60px;
+    margin: 5px;
+  }
+  
+  .start-button {
+    width: 50px;
+    height: 40px;
+    margin: 5px;
+  }
