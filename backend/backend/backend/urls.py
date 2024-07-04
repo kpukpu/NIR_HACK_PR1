@@ -20,4 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/dischargecalculate/', include('TO_DO_LIST.urls'))
+    path()
 ]
