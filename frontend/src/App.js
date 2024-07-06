@@ -4,6 +4,7 @@ import HomePage from "./HomePage/HomePage";
 import TodoListPage from "./TodoList/TodoListPage";
 import Calculate from "./Calculate/Calculate";
 import DischargeCalculate from "./DischargeCalculate/DischargeCalculate";
+import TodayWeather from "./TodayWeather/TodayWeatherPage";
 
 const App = () => {
     return (
