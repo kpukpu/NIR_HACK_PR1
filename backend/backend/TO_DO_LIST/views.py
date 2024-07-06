@@ -10,19 +10,22 @@ from .discharge import discharge_date
 from .calculate import calculate
 from .todays_weather import today_weather
 from django.http import JsonResponse
+from datetime import datetime, timedelta
 
 # Create your views here.
-
 @csrf_exempt
 def dischargedate(request):
-    serializer = dischargeSerializer(data=request.data)
-    if serializer.is_valid():
-        validated_data = serializer.save()  # 입대 날짜 저장
-        date = validated_data['date']
-        d_date = dischargedate(date)
-            
-        return Response(d_date, status = status.HTTP_200_OK)
-
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            start_date_str = data['start_date']
+            start_date = datetime.strptime(start_date_str, '%Y-%m-%d').date()
+            day548 = timedelta(days=548)
+            discharge_date = start_date + day548
+            return JsonResponse({'start_date': discharge_date.strftime('%Y-%m-%d')})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
 
 @csrf_exempt
 def calculate_view(request):
