@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',#restframework
     'rest_framework_simplejwt',#restframework
     'rest_framework.authtoken',#restframework
+    'dday'
 ]
 
 MIDDLEWARE = [
