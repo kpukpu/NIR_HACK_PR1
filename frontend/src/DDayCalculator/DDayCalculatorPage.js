@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 
-function DDayCalculator() {
+function DDayCalculatorPage() {
     const [targetDate, setTargetDate] =useState('');
     const [daysLeft, setDaysLeft] = useState(null);
     const [error, setError] = useState(null);
 
     const calculateDday = async () => {
         try{
-            const response = await axios.post('http://127.0.0.1:8000/api/calculate_dday/', {
+            const response = await axios.post('http://localhost:8000/api/calculate_dday/', {
                 target_date: targetDate
             });
             setDaysLeft(response.data.days_left);
@@ -34,4 +34,4 @@ function DDayCalculator() {
     );
 }
 
-export default DDayCalculator;
+export default DDayCalculatorPage;
