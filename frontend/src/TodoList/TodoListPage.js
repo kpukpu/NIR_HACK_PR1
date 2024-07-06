@@ -1,15 +1,37 @@
 import React, {useEffect, useRef, useState} from "react";
 import List from "./components/List";
 import Form from "./components/Form";
+import axios from "axios";
 
 const TodoListPage = () => {
     const [todos, setTodos] = useState([]);
     const isInitialMount = useRef(true);
 
-    useEffect(() => {
-        const savedTodos = localStorage.getItem('todos');
-        if (savedTodos) {
+    const fetchTodos = async () => {
+        try {
+            const response = await axios.get('/api/todos');
+            //setTodos(response.data);
+            return response.data;
+        } catch (error) {
+            console.error("Failed to fetch todos: ", error);
+        }
+    }
+
+    const saveTodos = async (todos) => {
+        try {
+            await axios.post('/api/todos', todos); // REST API의 엔드포인트에 맞게 수정
+        } catch (error) {
+            console.error("Failed to save todos:", error);
+        }
+    }
+
+    useEffect(async () => {
+        const savedTodos = fetchTodos();
+        /*if (savedTodos) {
             setTodos(JSON.parse(savedTodos));
+        }*/
+        if (savedTodos) {
+            setTodos(await savedTodos);
         }
     }, []);
 
@@ -17,7 +39,14 @@ const TodoListPage = () => {
         if (isInitialMount.current) {
             isInitialMount.current = false;
         } else {
-            localStorage.setItem('todos', JSON.stringify(todos));
+            //localStorage.setItem('todos', JSON.stringify(todos));
+            saveTodos(todos)
+                .then(() => {
+                    console.log("Todos saved successfully");
+                })
+                .catch(error => {
+                    console.error("Failed to save todos:", error);
+                });
         }
     }, [todos]);
 
