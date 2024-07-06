@@ -9,7 +9,7 @@ const TodoListPage = () => {
 
     const fetchTodos = async () => {
         try {
-            const response = await axios.get('/api/todos');
+            const response = await axios.get('http://localhost:8000/api/todos');
             //setTodos(response.data);
             return response.data;
         } catch (error) {
