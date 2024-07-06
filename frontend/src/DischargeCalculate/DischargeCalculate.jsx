@@ -1,23 +1,22 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function DischargeCalculate() {
   const [startDate, setStartDate] = useState('');
   const [result, setResult] = useState('');
 
-  const calculateDischargeDate = () => {
-    const startDateObj = new Date(startDate);
-    const serviceMonths = 18; // 육군 복무 기간
-
-    const dischargeDate = new Date(startDateObj.setMonth(startDateObj.getMonth() + serviceMonths));
-    const today = new Date();
-    const remainingDays = Math.ceil((dischargeDate - today) / (1000 * 60 * 60 * 24));
-
-    const formattedToday = `${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`;
-    const formattedDischargeDate = `${dischargeDate.getFullYear()}년 ${dischargeDate.getMonth() + 1}월 ${dischargeDate.getDate()}일`;
-
-    setResult(`오늘날짜: ${formattedToday}<br>예상 전역일: ${formattedDischargeDate}<br>남은 복무일수: ${remainingDays}일`);
+  const calculateDischargeDate = async () => {
+    try {
+      const response = await axios.post('http://localhost:8000/api/dischargedate/', {
+        start_date: startDate
+      });
+      setResult(`예상 전역일: ${response.data.discharge_date}`);
+    } catch (error) {
+      console.error('There was an error!', error);
+      setResult('전역일 계산 중 오류가 발생했습니다.');
+    }
   };
- 
+
   return (
     <div>
       <p><b>전역일 계산기</b></p>
@@ -35,7 +34,7 @@ function DischargeCalculate() {
       >
         전역일 계산하기
       </button>
-      <div id="result" dangerouslySetInnerHTML={{ __html: result }}></div>
+      <div id="result">{result}</div>
     </div>
   );
 }
