@@ -14,10 +14,10 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent.parent #NIR_HACK_DIR에 위치함
-
+BASE_DIR = Path(__file__).resolve().parent.parent.parent  # NIR_HACK_DIR에 위치함
 
 REACT_BUILD_DIR = os.path.join(BASE_DIR, 'frontend', 'build')
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -33,7 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'corsheaders',
+    'corsheaders',#restframework
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,27 +41,31 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'TO_DO_LIST',
-    'rest_framework',
-    'rest_framework_simplejwt',
-    'rest_framework.authtoken',
+    'rest_framework',#restframework
+    'rest_framework_simplejwt',#restframework
+    'rest_framework.authtoken',#restframework
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # 위치 변경
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
-]
 
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS 설정
+CORS_ALLOW_ALL_ORIGINS = True  # 모든 출처에서의 요청을 허용#restframework
 
-CORS_ALLOW_METHODS = [
+# 특정 출처에서 오는 요청만 허용하려면
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:3000',
+# ]
+
+CORS_ALLOW_METHODS = [#restframework
     "DELETE",
     "GET",
     "OPTIONS",
@@ -70,7 +74,7 @@ CORS_ALLOW_METHODS = [
     "PUT",
 ]
 
-CORS_ALLOW_HEADERS = [
+CORS_ALLOW_HEADERS = [#restframework
     "accept",
     "accept-encoding",
     "authorization",
@@ -81,7 +85,8 @@ CORS_ALLOW_HEADERS = [
     "x-csrftoken",
     "x-requested-with",
 ]
-REST_FRAMEWORK = {
+
+REST_FRAMEWORK = {#restframework
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
