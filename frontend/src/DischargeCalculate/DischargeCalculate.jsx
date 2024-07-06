@@ -10,7 +10,7 @@ function DischargeCalculate() {
       const response = await axios.post('http://localhost:8000/api/dischargedate/', {
         start_date: startDate
       });
-      setResult(`예상 전역일: ${response.data.discharge_date}`);
+      setResult(`예상 전역일: ${response.data.start_date}`);
     } catch (error) {
       console.error('There was an error!', error);
       setResult('전역일 계산 중 오류가 발생했습니다.');

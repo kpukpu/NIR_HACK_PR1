@@ -14,7 +14,5 @@ def today_weather():
     weather_span = soup.find('span', class_='weather before_slash')
     weather_status = weather_span.get_text(strip=True)
 
-    return {
-        "temp" : current_temp,
-        "weather" : weather_status
-    }
+    return {'c_temp':current_temp,
+            '_weather':weather_status}

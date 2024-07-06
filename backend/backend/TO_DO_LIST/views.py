@@ -14,15 +14,14 @@ from django.http import JsonResponse
 # Create your views here.
 
 @csrf_exempt
-class dischargedate(APIView):
-    def post(self, request):
-        serializer = dischargeSerializer(data=request.data)
-        if serializer.is_valid():
-            validated_data = serializer.save()  # 입대 날짜 저장
-            date = validated_data['date']
-            d_date = dischargedate(date)
+def dischargedate(request):
+    serializer = dischargeSerializer(data=request.data)
+    if serializer.is_valid():
+        validated_data = serializer.save()  # 입대 날짜 저장
+        date = validated_data['date']
+        d_date = dischargedate(date)
             
-            return Response(d_date, status = status.HTTP_200_OK)
+        return Response(d_date, status = status.HTTP_200_OK)
 
 
 @csrf_exempt
@@ -37,6 +36,6 @@ def calculate_view(request):
     return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 @csrf_exempt
-def weather_view():
+def weather_view(request):
     result = today_weather()
     return JsonResponse(result)
