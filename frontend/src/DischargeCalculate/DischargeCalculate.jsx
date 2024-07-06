@@ -17,7 +17,7 @@ function DischargeCalculate() {
 
     setResult(`오늘날짜: ${formattedToday}<br>예상 전역일: ${formattedDischargeDate}<br>남은 복무일수: ${remainingDays}일`);
   };
-
+ 
   return (
     <div>
       <p><b>전역일 계산기</b></p>

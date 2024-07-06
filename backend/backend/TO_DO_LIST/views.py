@@ -8,11 +8,12 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from .discharge import discharge_date
 from .calculate import calculate
+from .todays_weather import today_weather
 from django.http import JsonResponse
 
 # Create your views here.
 
-
+@csrf_exempt
 class dischargedate(APIView):
     def post(self, request):
         serializer = dischargeSerializer(data=request.data)
@@ -21,7 +22,7 @@ class dischargedate(APIView):
             date = validated_data['date']
             d_date = dischargedate(date)
             
-            return Response(d_date, status= status.HTTP_200_OK)
+            return Response(d_date, status = status.HTTP_200_OK)
 
 
 @csrf_exempt
@@ -34,3 +35,8 @@ def calculate_view(request):
         result = calculate(a,b,c)
         return JsonResponse({'result': result})
     return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+@csrf_exempt
+def weather_view():
+    result = today_weather()
+    return JsonResponse(result)
