@@ -1,0 +1,53 @@
+.container {
+    display: flex;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    justify-content: flex-end;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px; /* 줄어든 너비 */
+    height: 28px; /* 줄어든 높이 */
+    margin-left: 10px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.switch span {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 28px; /* 높이에 맞게 조정 */
+}
+
+.switch span:before {
+    position: absolute;
+    content: "";
+    height: 22px; /* 줄어든 높이 */
+    width: 22px; /* 줄어든 너비 */
+    left: 3px; /* 크기에 맞게 조정 */
+    bottom: 3px; /* 크기에 맞게 조정 */
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.switch input:checked + span {
+    background-color: limegreen;
+}
+
+.switch input:checked + span:before {
+    transform: translateX(22px); /* 크기에 맞게 조정 */
+}
